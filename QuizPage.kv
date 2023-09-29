@@ -1,0 +1,97 @@
+<QuizManager>:
+    Question1Screen:
+        name: "question1"
+    Question2Screen:
+        name: "question2"
+    CorrectScreen:
+        name: "correct"
+    ErrorScreen:
+        name: "error"
+
+<Question1Screen>:
+    BoxLayout:
+        orientation: "vertical"
+        Label:
+            size_hint: 1,1
+            font_size: 48
+            text: "Question 1: What is 13 + 6?"
+        BoxLayout:
+            padding: 15
+            spacing: 15
+            orientation: "horizontal"
+            Button:
+                background_normal: "monkey2.jpg"
+                size_hint: 1, 0.9
+                font_size: 48
+                text: "19"
+                background_color: (1, 0.984, 0, 1)
+                on_release: root.answer_question(True)
+            Button:
+                background_normal: "monkey3.jpg"
+                size_hint: 1, 0.9
+                font_size: 48
+                text: "29"
+                background_color: (1, 0.984, 0, 1)
+                on_release: root.answer_question(False)
+            Button:
+                background_normal: "monkey.jpg"
+                size_hint: 1, 0.9
+                font_size: 48
+                text: "1"
+                background_color: (1, 0.984, 0, 1)
+                on_release: root.answer_question(False)
+
+<Question2Screen>:
+    BoxLayout:
+        orientation: "vertical"
+        Label:
+            size_hint: 1,1
+            font_size: 48
+            text: "What animal was the image for the correct answer on the last question?"
+        BoxLayout:
+            padding: 15
+            spacing: 15
+            orientation: "vertical"
+            TextInput:
+                id: animal
+                hint_text: "Enter animal name here"
+            Button:
+                size_hint: 1, 0.9
+                font_size: 48
+                text: "19"
+                background_color: (1, 0.984, 0, 1)
+                on_release: root.check_answer(animal.text)
+
+<CorrectScreen>:
+    BoxLayout:
+        orientation: "vertical"
+        Label:
+            size_hint: 1,2
+            font_size: 100
+            text: "Correct!"
+            color: (0,1,0,1)
+        AnchorLayout:
+            Button:
+                anchor_x: "center"
+                background_color: (0,1,0,1)
+                font_size: 48
+                text: "Next Question"
+                size_hint: 0.75, 0.5
+                on_release: root.next_question()
+
+
+<ErrorScreen>:
+    BoxLayout:
+        orientation: "vertical"
+        Label:
+            size_hint: 1,2
+            font_size: 100
+            text: "Incorrect!"
+            color: (1,0,0,1)
+        AnchorLayout:
+            Button:
+                anchor_x: "center"
+                background_color: (1,0,0,1)
+                font_size: 48
+                text: "Next Question"
+                size_hint: 0.75, 0.5
