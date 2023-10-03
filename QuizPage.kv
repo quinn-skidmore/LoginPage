@@ -43,11 +43,13 @@
 
 <Question2Screen>:
     BoxLayout:
+        id: ids
         orientation: "vertical"
         Label:
+            id: animlabel
             size_hint: 1,1
             font_size: 48
-            text: "What animal was the image for the correct answer on the last question?"
+            text: "What animal was the image\n for the answers on the last question?"
         BoxLayout:
             padding: 15
             spacing: 15
@@ -58,7 +60,7 @@
             Button:
                 size_hint: 1, 0.9
                 font_size: 48
-                text: "19"
+                text: "Submit Answer"
                 background_color: (1, 0.984, 0, 1)
                 on_release: root.check_answer(animal.text)
 
@@ -95,3 +97,4 @@
                 font_size: 48
                 text: "Next Question"
                 size_hint: 0.75, 0.5
+                on_release: root.retry_quiz()
