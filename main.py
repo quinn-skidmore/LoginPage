@@ -1,25 +1,38 @@
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
-'''
-Builder.load_file("QuizPage.kv")
+
+Builder.load_file("LoginPage.kv")
+
 
 class LoginPageApp(App):
     def build(self):
         return LoginManager()
 
+
 class LoginManager(ScreenManager):
     pass
-class CreateOrSignInScreen(Screen):
-    def answer_question(self,is_correct):
-        if is_correct:
-            print("Correct")
-            self.manager.current = "correct"
-        else:
-            self.manager.current = "error"
+
+
+class StartScreen(Screen):
+    def create(self):
+        self.manager.current = "create"
+
+    def login(self):
+        self.manager.current = "login"
 
 
 
+class CreateScreen(Screen):
+    def check_validity(self,username,password):
+        pass
+
+
+class LoginScreen(Screen):
+    pass
+
+
+LoginPageApp().run()
 '''
 Builder.load_file("QuizPage.kv")
 
@@ -71,3 +84,4 @@ class ErrorScreen(Screen):
 
 
 QuizPageApp().run()
+'''
