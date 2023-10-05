@@ -5,6 +5,8 @@
         name: "create"
     LoginScreen:
         name: "login"
+    WelcomeScreen:
+        name: "welcome"
 
 <StartScreen>:
     BoxLayout:
@@ -25,6 +27,59 @@
 
 <CreateScreen>:
     BoxLayout:
+        id: csm
+        padding: 100
+        spacing: 20
+        orientation: "vertical"
+        BoxLayout:
+            id: ups
+            spacing: 10
+            orientation: "vertical"
+            BoxLayout:
+                orientation: "horizontal"
+                Label:
+                    text: "Username:"
+                    font_size: 18
+                TextInput:
+                    id: username
+                    font_size: 18
+            BoxLayout:
+                orientation: "horizontal"
+                Label:
+                    font_size: 18
+                    text: "Password:"
+                TextInput:
+                    font_size: 18
+                    id: password
+            BoxLayout:
+                orientation: "horizontal"
+                Label:
+                    font_size: 18
+                    text: "Reenter Password:"
+                TextInput:
+                    font_size: 18
+                    id: passwordconfirm
+            Label:
+                id: invalid
+                text: "Invalid Password"
+                color: 1,0,0,0
+        Label:
+            id: requirements
+            text: "Password must include:\n 1. A capitalized letter \n 2. A number \n 3. A symbol \n 4. At least 8 characters \n 5. A lowercase letter"
+        BoxLayout:
+            orientation: "horizontal"
+            Button:
+                text: "Create Account"
+                size_hint: 1, 0.5
+                on_release: root.check_validity(username.text,password.text,passwordconfirm.text)
+            Button:
+                text: "Back"
+                size_hint: 0.1,0.5
+                on_release: root.back()
+
+
+<LoginScreen>:
+    BoxLayout:
         padding: 100
         spacing: 100
         orientation: "vertical"
@@ -34,20 +89,38 @@
                 orientation: "horizontal"
                 Label:
                     text: "Username:"
+                    font_size: 36
                 TextInput:
                     id: username
-                    font_size: 48
-                    hint_font_size: 40
-
+                    font_size: 36
             BoxLayout:
                 orientation: "horizontal"
                 Label:
+                    font_size: 36
                     text: "Password:"
                 TextInput:
+                    font_size: 36
                     id: password
         Label:
-            text: "Password must include:\n 1. A capitalized letter \n 2. A number \n 3. A symbol \n 4. At least 8 characters \n 5. A lowercase letter"
-        Button:
-            text: "Create Account"
-            size_hint: 1, 0.5
+            text: "If you don't have an account, create one first!"
+        BoxLayout:
+            orientation: "horizontal"
+            Button:
+                text: "Login"
+                size_hint: 1, 0.5
+                on_release: root.login(username.text,password.text)
+            Button:
+                text: "Back"
+                size_hint: 0.1,0.5
+                on_release: root.back()
 
+<WelcomeScreen>
+    BoxLayout:
+        spacing: 200
+        padding: 150
+        orientation: "vertical"
+        Label:
+            text: "Welcome"
+        Button:
+            text: "Sign Out"
+            on_release: root.sign_out()

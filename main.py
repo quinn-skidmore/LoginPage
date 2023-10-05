@@ -1,8 +1,12 @@
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
-
+from kivy.uix.label import Label
 Builder.load_file("LoginPage.kv")
+
+accounts = {"quinn":"skidmore"}
+special_characters = "`~!@#$%^&*()-_=+/\|][}{';:/.,?><"
+numbers = "1234567890"
 
 
 class LoginPageApp(App):
@@ -22,14 +26,48 @@ class StartScreen(Screen):
         self.manager.current = "login"
 
 
-
 class CreateScreen(Screen):
-    def check_validity(self,username,password):
+    def check_validity(self,username, password, password_confirm):
+        special = False
+        number = False
+        capital = False
+        lower = False
+        if username not in accounts and password == password_confirm:
+            for char in special_characters:
+                if char in password:
+                    special = True
+            for num in numbers:
+                if num in password:
+                    number = True
+            for char in password:
+                if char.capitalize() == char:
+                    capital = True
+                if char.lower() == char:
+                    lower = True
+
+            if special and number and capital and lower and len(password) >= 8:
+                accounts[username] = password
+                self.manager.current = "welcome"
+            else:
+                print("incorrect")
+                invalid = Label(text= "Invalid Password")
+                self.ids.invalid.color = (1,0,0,1)
         pass
+
+    def back(self):
+        self.manager.current = "start"
 
 
 class LoginScreen(Screen):
-    pass
+    def login(self, username, password):
+        if username in accounts and accounts[username] == password:
+            self.manager.current = "welcome"
+
+    def back(self):
+        self.manager.current = "start"
+class WelcomeScreen(Screen):
+    def sign_out(self):
+        self.manager.current = "start"
 
 
 LoginPageApp().run()
