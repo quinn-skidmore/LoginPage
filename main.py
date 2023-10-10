@@ -2,6 +2,9 @@ from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.label import Label
+from kivy.uix.widget import Widget
+from kivy.properties import StringProperty
+
 Builder.load_file("LoginPage.kv")
 
 accounts = {"quinn":"skidmore"}
@@ -24,6 +27,7 @@ class StartScreen(Screen):
 
     def login(self):
         self.manager.current = "login"
+
 
 
 class CreateScreen(Screen):
@@ -50,9 +54,9 @@ class CreateScreen(Screen):
                 self.manager.current = "welcome"
             else:
                 print("incorrect")
-                invalid = Label(text= "Invalid Password")
                 self.ids.invalid.color = (1,0,0,1)
-        pass
+        else:
+            self.ids.invalid.color = (1, 0, 0, 1)
 
     def back(self):
         self.manager.current = "start"
